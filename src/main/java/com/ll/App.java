@@ -2,7 +2,6 @@ package com.ll;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,6 +11,8 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         File file = new File("db.txt");
+
+        int wiseSayingLastId = 0;
 
         outer:
         while (true) {
@@ -24,13 +25,14 @@ public class App {
 
                 case "등록":
                     System.out.print("명언) ");
-                    String Maxim = sc.nextLine();
+                    String maxim = sc.nextLine();
                     System.out.print("작가 ) ");
                     String author = sc.nextLine();
-                    FileWriter fw = new FileWriter(file);
-                    fw.write(Maxim);
-                    fw.write(author);
-                    System.out.println("명언이 등록되었습니다");
+
+                    int id = ++wiseSayingLastId;
+                    WiseSaying wiseSay = new WiseSaying(id, maxim, author);
+                    System.out.println(wiseSay);
+                    System.out.printf("%d번 명언이 등록되었습니다\n", id);
                     break;
 
                 case "목록":

@@ -3,6 +3,8 @@ package com.ll;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -10,8 +12,9 @@ public class App {
         System.out.println("== 명언 SSG ==");
 
         Scanner sc = new Scanner(System.in);
-        File file = new File("db.txt");
 
+
+        List<WiseSaying> wiseSayings = new ArrayList<>();
         int wiseSayingLastId = 0;
 
         outer:
@@ -31,15 +34,19 @@ public class App {
 
                     int id = ++wiseSayingLastId;
                     WiseSaying wiseSay = new WiseSaying(id, maxim, author);
-                    System.out.println(wiseSay);
+                    wiseSayings.add(wiseSay);
+
                     System.out.printf("%d번 명언이 등록되었습니다\n", id);
                     break;
 
                 case "목록":
-                    FileReader fr = new FileReader(file);
-
-                    System.out.println();
-
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("-------------------");
+                    for (int i = wiseSayings.size() - 1; i >= 0; i--) {
+                        WiseSaying wiseSaying_ = wiseSayings.get(i);
+                        System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.maxim, wiseSaying_.author);
+                    }
+                    break;
 
                 case "삭제":
 
